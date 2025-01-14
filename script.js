@@ -15,6 +15,18 @@ function render(stateList) {
       episode.summary.toLowerCase().includes(stateList.searchTerm.toLowerCase())
   );
   makePageForEpisodes(filteredEpisode);
+  selectEpisodes(stateList.allEpisodes);
+}
+
+function selectEpisodes(episodeList) {
+  const selectList = document.getElementById("select");
+  for (episode of episodeList) {
+    const optionList = document.createElement("option");
+    const episodeSeason = String(episode.season).padStart(2, "0");
+    const episodeNumber = String(episode.number).padStart(2, "0");
+    optionList.textContent = `S${episodeSeason}E${episodeNumber} - ${episode.name} `;
+    selectList.append(optionList);
+  }
 }
 
 function createSearchTerm(stateList) {
