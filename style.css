@@ -37,18 +37,21 @@ body {
   color: black;
   font-size: 1rem;
 }
-/*.reference-button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  font-size: 1em;
-  color: #fff;
-  background-color: #939292f7;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-*/
+
 .episode-card:hover {
   background-color: #e1ebb4;
+}
+
+#search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #9fbd9b;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+}
+
+#search:focus {
+  background-color: #fff;
 }
