@@ -16,25 +16,25 @@ function makePageForEpisodes(episodeList) {
   // for each episode make new card with <div>
   
    for(const episode of episodeList){
-    const episodeCard = document.createElement("div"); 
-    episodeCard.className = "episode-card"; // add class for card for styling
-    
-    //each card includes title, episodeCode, name, image and summary
-    const episodeSeason = String(episode.season).padStart(2, "0");
-    const episodeNumber= String(episode.number).padStart(2, "0");
+     const episodeCard = document.createElement("div");
+     episodeCard.className = "episode-card"; // add class for card for styling
 
-    episodeCard.innerHTML =`
+     //each card includes title, episodeCode, name, image and summary
+     const episodeSeason = episode.season.toString().padStart(2, "0"); //simplify string method and padStart
+     const episodeNumber = episode.number.toString().padStart(2, "0"); //simplify string method and padStart
+
+     episodeCard.innerHTML = `
     <h2>${episode.name} (S${episodeSeason}E${episodeNumber})</h2>
     <img src="${episode.image.medium}" alt="${episode.name}">
     <p>${episode.summary}</p>
-    `;  
-    // each episode can open in new window for more detail (from the source website)
-    episodeCard.addEventListener("click", () => {
-      window.open(episode.url, "_blank"); 
-    });
-  // Append the episode card to the container
-  episodesContainer.append(episodeCard);
-  };
+    `;
+     // each episode can open in new window for more detail (from the source website)
+     episodeCard.addEventListener("click", () => {
+       window.open(episode.url, "_blank");
+     });
+     // Append the episode card to the container
+     episodesContainer.append(episodeCard);
+   };
   // Append the container card to the root
   rootElem.append(episodesContainer);
 }
