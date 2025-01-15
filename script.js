@@ -63,7 +63,6 @@ function episodeCounter(filteredCount, totalCount) {
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = ``; //clearing textContent
-
   //Add container and class for styling
   const episodesContainer = document.createElement("div");
   episodesContainer.className = "episodes-container"; //
@@ -73,13 +72,9 @@ function makePageForEpisodes(episodeList) {
   for (const episode of episodeList) {
     const episodeCard = document.createElement("div");
     episodeCard.className = "episode-card"; // add class for card for styling
-
     //each card includes title, episodeCode, name, image and summary
-    const episodeSeason = episode.season.toString().padStart(2, "0"); //simplify string method and padStart
-    const episodeNumber = episode.number.toString().padStart(2, "0"); //simplify string method and padStart
-
     episodeCard.innerHTML = `
-    <h2>${episode.name} (S${episodeSeason}E${episodeNumber})</h2>
+    <h2>${episode.name} (S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2, "0")})</h2>
     <img src="${episode.image.medium}" alt="${episode.name}">
     <p>${episode.summary}</p>
     `;
