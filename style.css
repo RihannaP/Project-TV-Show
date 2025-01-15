@@ -55,3 +55,14 @@ body {
 #search:focus {
   background-color: #fff;
 }
+
+#select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 2px solid #9fbd9b;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+}
