@@ -15,18 +15,34 @@ function render(stateList) {
       episode.summary.toLowerCase().includes(stateList.searchTerm.toLowerCase())
   );
   makePageForEpisodes(filteredEpisode);
+  episodeCounter(filteredEpisode.length, stateList.allEpisodes.length);
   selectEpisodes(stateList.allEpisodes);
 }
+
 
 function selectEpisodes(episodeList) {
   const selectList = document.getElementById("select");
   for (episode of episodeList) {
     const optionList = document.createElement("option");
+    optionList.value = episode.id;
     const episodeSeason = String(episode.season).padStart(2, "0");
     const episodeNumber = String(episode.number).padStart(2, "0");
     optionList.textContent = `S${episodeSeason}E${episodeNumber} - ${episode.name} `;
     selectList.append(optionList);
   }
+  selectList.addEventListener("change", (event) => {
+    const selectedId = event.target.value;
+    if (selectedId === "allEpisodes") {
+      makePageForEpisodes(episodeList);
+      episodeCounter(episodeList.length, episodeList.length);
+    } else {
+      const selectEpisode = Array(
+        episodeList.find((episode) => episode.id == selectedId)
+      );
+      makePageForEpisodes(selectEpisode);
+      episodeCounter(1, episodeList.length);
+    }
+  });
 }
 
 function createSearchTerm(stateList) {
@@ -36,6 +52,12 @@ function createSearchTerm(stateList) {
     stateList.searchTerm = event.target.value; //Update the searchTerm in state
     render(stateList); //Re-render with the updated state
   });
+}
+
+// Function to update how many episodes are displayed
+function episodeCounter(filteredCount, totalCount) {     
+  const countElement = document.getElementById("episodeCount");
+  countElement.textContent = `Displaying ${filteredCount}/${totalCount} episodes.`;
 }
 
 function makePageForEpisodes(episodeList) {
