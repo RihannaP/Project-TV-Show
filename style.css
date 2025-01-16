@@ -56,7 +56,7 @@ body {
   background-color: #fff;
 }
 
-#select {
+.select {
   width: 100%;
   max-width: 400px;
   padding: 10px;
