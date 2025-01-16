@@ -10,20 +10,18 @@
 </head>
 
 <body>
-  <div>
-    <label>
-      Select:<select id="select-show" class="select" name="select" placeholder="Select show">
-        <option value="shows">Shows</option>
-      </select>
+    <div id="searchbar">
       <label>
-        Select:<select id="select" class="select" name="select" placeholder="Select episodes ...">
-          <option value="allEpisodes">All Episodes</option>
-        </select>
+        Select Show:<select id="selectS" name="select"></select>
+      </label>
+      <label>
+        Select Episode:<select id="selectE" name="select"></select>
       </label>
       <label>
         Search:<input type="text" id="search" name="search" placeholder="Search episodes ..." />
       </label>
       <p id="episodeCount"></p>
+      <h2 id="alarm" style="color: black; font-size: 1.2em; margin-bottom: 10px;"></h2>
   </div>
   <div id="root">
   </div>
