@@ -1,68 +1,69 @@
 body {
+  background-color: #2f0243;
   font-family: Arial, sans-serif;
-  background-color: rgb(235, 246, 243);
+  color: #00ffff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
-.episodes-container{
+.episodes-container {
+  background-color: #000;
   display: flex;
   flex-wrap: wrap;
+  gap: 1.5rem;
   justify-content: center;
+  padding: 1rem;
 }
 
 .episode-card {
-  background-color: rgb(208, 243, 234);
-  width: 400px;
-  border: px solid #064651dd;
-  border-radius: 15px;
-  justify-items: center;
-  text-align: center;
-  padding: 10px;
-  margin: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.episode-card img{
   width: 100%;
-  border-radius: 15px;
-}
-.episode-card h2{
-  color: black;
-  font-size: 1.5rem;
-  border: 3px solid #24a978dd;
-  border-radius: 15px;
-  padding: 10px;
+  max-width: 400px;
+  border: 2px solid #1306cc;
+  background-color: #1c1c1c;
+  color: #e2e1f2;
+  border-radius: 8px;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.episode-card p{
-  color: black;
-  font-size: 1rem;
+.episode-card img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.episode-card h2 {
+  color: #71ffec;
+  font-size: 1.8rem;
+  margin: 10px 0;
 }
 
 .episode-card:hover {
-  background-color: rgb(165, 230, 214);
+  background-color: rgba(156, 87, 241, 0.2);
+  border-color: #6404f5;
+  transform: scale(1.05);
 }
 
-#search {
+
+#selectS,
+#selectE {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   padding: 10px;
+  margin: 20px auto;
   font-size: 16px;
-  border: 2px solid #24a978dd;
-  border-radius: 15px;
-  background-color: #f9f9f9;
+  border: 2px solid #3f47b3;
+  border-radius: 4px;
+  background-color: #1c1c1c;
+  color: #e2e1f2;
+
 }
 
-#search:focus {
-  background-color: #fff;
-}
-
-.select {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 16px;
-  border: 2px solid #24a978dd;
-  border-radius: 15px;
-  background-color: #f9f9f9;
+#search:focus,
+#select:focus {
+  outline: none;
+  border-color: #6404f5;
+  box-shadow: 0 0 5px #6404f5;
 }
