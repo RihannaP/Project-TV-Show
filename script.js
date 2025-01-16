@@ -1,45 +1,46 @@
 //You can edit ALL of the code here
+
 function setup() {
-  const states = {allEpisodes: [], searchTerm: ""}; // Initial searchTerm & allEpisode
+  const states = { allEpisodes: [], searchTerm: "" }; // Initial searchTerm & allEpisode
 
   fetchAllEpisodes()
-  .then((episodes) => {
-    if(episodes){   
-        states.allEpisodes = episodes ;
+    .then((episodes) => {
+      if (episodes) {
+        states.allEpisodes = episodes;
         render(states); //Initial render
-        createSearchTerm(states);  //Setup search functionality
-    }
-  })
-  .catch((error) =>{
-    console.error("Error in fetchAllEpisodes:", error.message);
-  }
-)
+        createSearchTerm(states); //Setup search functionality
+      }
+    })
+    .catch((error) => {
+      console.error("Error in fetchAllEpisodes:", error.message);
+    });
 }
 
-const fetchAllEpisodes = async () => {  //Fetch all episodes once
-    const messageAlarm = document.getElementById("root");
-    const loadingMessage = document.createElement("h1");
-    loadingMessage.textContent = "Loading, please wait..."
-    loadingMessage.style.display = "block";
-    messageAlarm.append(loadingMessage)
-    try {
+const fetchAllEpisodes = async () => {
+  //Fetch all episodes once
+  const messageAlarm = document.getElementById("root");
+  const loadingMessage = document.createElement("h1");
+  loadingMessage.textContent = "Loading, please wait...";
+  loadingMessage.style.display = "block";
+  messageAlarm.append(loadingMessage);
+  try {
     //Simulate a delay to test loading behavior
     await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay (2 seconds)
-        
+
     const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
     if (!response.ok) {
       throw new Error("Network response was not ok");
-    }    
-    return await response.json();
-    } catch(error){
-        const errorMessage = document.createElement("h1");
-        errorMessage.textContent = "An error occurred: " + error.message;
-        errorMessage.style.color = "red"; // Show error message
-        messageAlarm.append(errorMessage)
-    } finally{
-      loadingMessage.style.display = "none";
     }
+    return await response.json();
+  } catch (error) {
+    const errorMessage = document.createElement("h1");
+    errorMessage.textContent = "An error occurred: " + error.message;
+    errorMessage.style.color = "red"; // Show error message
+    messageAlarm.append(errorMessage);
+  } finally {
+    loadingMessage.style.display = "none";
   }
+};
 
 function render(stateList) {
   //Filter episodes based on the searchTerm (case-insensitive)
@@ -52,7 +53,6 @@ function render(stateList) {
   episodeCounter(filteredEpisode.length, stateList.allEpisodes.length);
   selectEpisodes(stateList.allEpisodes);
 }
-
 
 function selectEpisodes(episodeList) {
   const selectList = document.getElementById("select");
@@ -89,7 +89,7 @@ function createSearchTerm(stateList) {
 }
 
 // Function to update how many episodes are displayed
-function episodeCounter(filteredCount, totalCount) {     
+function episodeCounter(filteredCount, totalCount) {
   const countElement = document.getElementById("episodeCount");
   countElement.textContent = `Displaying ${filteredCount}/${totalCount} episodes.`;
 }
