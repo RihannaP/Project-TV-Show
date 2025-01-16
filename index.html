@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | Rihanna P (RihannaP)</title>
-    <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
 
-  <body>
-    <div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Show Project | Rihanna P (RihannaP)</title>
+  <link href="style.css" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div>
+    <label>
+      Select:<select id="select-show" class="select" name="select" placeholder="Select show">
+        <option value="shows">Shows</option>
+      </select>
       <label>
-        Select:<select id="select" name="select" placeholder="Select episodes ...">
+        Select:<select id="select" class="select" name="select" placeholder="Select episodes ...">
           <option value="allEpisodes">All Episodes</option>
         </select>
       </label>
@@ -19,16 +24,17 @@
         Search:<input type="text" id="search" name="search" placeholder="Search episodes ..." />
       </label>
       <p id="episodeCount"></p>
-    </div>
-    <div id="root">
-    </div>
+  </div>
+  <div id="root">
+  </div>
 
-    <!-- Loads YOUR javascript code -->
-    <script src="script.js" defer></script><!--good practice for non-blocking behavior-->
-    <footer>
-      <p>
-        Data originally comes from <a href="https://tvmaze.com/"> TV Maze!</a>
-      </p>
-    </footer>
-  </body>
+  <!-- Loads YOUR javascript code -->
+  <script src="script.js" defer></script><!--good practice for non-blocking behavior-->
+  <footer>
+    <p>
+      Data originally comes from <a href="https://tvmaze.com/"> TV Maze!</a>
+    </p>
+  </footer>
+</body>
+
 </html>
