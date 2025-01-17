@@ -9,10 +9,12 @@ async function setup() {
     if (shows) {
       showStates = shows;
       makePageForShows(showStates);
-      createSearchTerm(showStates); // Initial render for shows
-      selectShowDropDown(showStates); // Populate show dropdown
+      createSearchTerm(showStates); 
+      selectShowDropDown(showStates);
     }
   } catch (error) {
+    const rootElem = document.getElementById("root");
+  rootElem.innerHTML = `<p>Error fetching shows: ${error}</p>`;
     console.error("Error fetching shows:", error);
   }
 }
@@ -28,7 +30,7 @@ async function fetchWithCache(url) {
     }
     const response = await fetch(url);
     if (!response.ok) {
-      console.error(`Failed to fetch data from ${url}`);
+      rootElem.innerHTML = `<p>Failed to fetch data from ${url}</p>`;
     }
     const data = await response.json();
     dataCache[url] = data;
@@ -36,7 +38,6 @@ async function fetchWithCache(url) {
     return data;
   } catch (error) {
     rootElem.innerHTML = `<p>An error occurred: ${error.message}</p>`;
-    throw error;
   }
 }
 
@@ -74,12 +75,13 @@ function selectShowDropDown(showList) {
           `https://api.tvmaze.com/shows/${selectedValue}/episodes`
         );
         if (episodes) {
-          makePageForEpisodes(episodesStates)
-          createSearchTerm(episodesStates); // Render episodes
-          selectDropDownEpisodes(episodesStates.all); // Populate episode dropdown
+          makePageForEpisodes(episodes)
+          createSearchTerm(episodes); // Render episodes
+          selectDropDownEpisodes(episodes); // Populate episode dropdown
         }
       } catch (error) {
-        console.error("Error fetching episodes:", error);
+        const rootElem = document.getElementById("root");
+        rootElem.innerHTML = `<p>Error fetching episodes: ${error}</p>`;
       }
     }
   });
@@ -173,7 +175,7 @@ function makePageForShows(showsList) {
     
     const showTitle = showCard.querySelector("h2"); // Select the h2 element
     showTitle.addEventListener("click", () => {
-      window.open(show.url, "_self");
+      window.open(makePageForEpisodes(show), "_self");
     });
     
     showsContainer.append(showCard);

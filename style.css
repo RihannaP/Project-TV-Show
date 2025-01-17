@@ -75,7 +75,7 @@ button {
   gap: 1.5rem;
   justify-content: center;
   padding: 1rem;
-  margin: 50px;
+  margin: 50px 0;
 }
 
 .show-card {
@@ -121,8 +121,7 @@ button {
 
 .episode-card{
   width: 100%;
-  max-width: 100px;
-  border: 2px solid #1306cc;
+  max-width: 300px;
   background-color: #1c1c1c;
   color: #e2e1f2;
   border-radius: 8px;
@@ -143,6 +142,7 @@ button {
 }
 
 .episode-card:hover {
+  cursor: pointer;
   background-color: rgba(156, 87, 241, 0.2);
   border-color: #6404f5;
   transform: scale(1.05);
