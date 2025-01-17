@@ -9,12 +9,13 @@ async function setup() {
     if (shows) {
       showStates = shows;
       makePageForShows(showStates);
-      createSearchTerm(showStates); 
       selectShowDropDown(showStates);
+      showSearchBox(showStates); 
+      
     }
   } catch (error) {
     const rootElem = document.getElementById("root");
-  rootElem.innerHTML = `<p>Error fetching shows: ${error}</p>`;
+    rootElem.innerHTML = `<p>Error fetching shows: ${error}</p>`;
     console.error("Error fetching shows:", error);
   }
 }
@@ -68,7 +69,7 @@ function selectShowDropDown(showList) {
     const selectedValue = event.target.value;
 
     if (selectedValue === "allShows") {
-      createSearchTerm(showStates);
+      makePageForShows(showStates);
     } else {
       try {
         const episodes = await fetchWithCache(
@@ -76,8 +77,12 @@ function selectShowDropDown(showList) {
         );
         if (episodes) {
           makePageForEpisodes(episodes)
-          createSearchTerm(episodes); // Render episodes
+          episodeSearchBox(episodes); // Render episodes
           selectDropDownEpisodes(episodes); // Populate episode dropdown
+          backToShowsButton(true);
+          episodeDropVisible(true);
+          
+  
         }
       } catch (error) {
         const rootElem = document.getElementById("root");
@@ -121,16 +126,6 @@ function selectDropDownEpisodes(episodeList) {
   });
 }
 
-// Render the page
-function filter(stateList, searchTerm) {
-  //Filter based on the searchTerm (case-sensitive)
-  const filteredElements = stateList.filter(
-    (element) =>
-      element.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      element.summary.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  makePageForShows(filteredElements);
-}
 
 // Update episode counter
 function episodeCounter(filteredCount, totalCount) {
@@ -139,14 +134,47 @@ function episodeCounter(filteredCount, totalCount) {
 }
 
 // Create search functionality
-function createSearchTerm(stateList) {
+function showSearchBox(stateList) {
   const searchBox = document.getElementById("search");
   searchBox.value = "";
   searchBox.addEventListener("input", (event) => {
     const searchTerm = event.target.value; //Update the searchTerm in state
-    filter(stateList, searchTerm); //Re-render with the updated state
+    const filteredElements = stateList.filter(
+    (element) => element.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    element.summary?.toLowerCase().includes(searchTerm.toLowerCase())
+    //element.some((genre) => genre.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+    makePageForShows(filteredElements);
   });
 }
+function episodeSearchBox(stateList){
+  const searchBox = document.getElementById("search");
+  searchBox.value = "";
+  searchBox.addEventListener("input", (event) => {
+    const searchTerm = event.target.value; //Update the searchTerm in state
+   const filteredElements = stateList.filter(
+    (element) =>
+      element.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      element.summary.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  makePageForEpisodes(filteredElements);
+  episodeCounter(filteredElements.length, stateList.length)
+})
+}
+
+
+function backToShowsButton(status) {
+  const backToShowsButton = document.getElementById("back-to-shows");
+  backToShowsButton.style.display = status ? "block" : "none";
+  backToShowsButton.addEventListener("click", () => { makePageForShows(showStates) })
+    
+}
+
+function episodeDropVisible(status) {
+  const episodeListVisible = document.getElementById("selectE");
+  episodeListVisible.style.display = status ? "block" : "none";
+}
+
 // Create show card
 function makePageForShows(showsList) {
   const rootElem = document.getElementById("root");
