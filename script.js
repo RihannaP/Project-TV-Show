@@ -7,11 +7,10 @@ async function setup() {
   try {
     const shows = await fetchWithCache("https://api.tvmaze.com/shows");
     if (shows) {
-      showStates= shows;
+      showStates = shows;
       makePageForShows(showStates);
       createSearchTerm(showStates); // Initial render for shows
       selectShowDropDown(showStates); // Populate show dropdown
-      createSearchTerm(episodesStates);
     }
   } catch (error) {
     console.error("Error fetching shows:", error);
@@ -69,14 +68,13 @@ function selectShowDropDown(showList) {
 
     if (selectedValue === "allShows") {
       createSearchTerm(showStates);
-      // episodeCounter(episodeList.length, episodeList.length);
     } else {
       try {
         const episodes = await fetchWithCache(
           `https://api.tvmaze.com/shows/${selectedValue}/episodes`
         );
         if (episodes) {
-          episodesStates.all = episodes;
+          makePageForEpisodes(episodesStates)
           createSearchTerm(episodesStates); // Render episodes
           selectDropDownEpisodes(episodesStates.all); // Populate episode dropdown
         }
@@ -113,7 +111,7 @@ function selectDropDownEpisodes(episodeList) {
       episodeCounter(episodeList.length, episodeList.length)
     } else {
       const selectedEpisode = episodeList.find(
-        (episode) => episode.id == selectedId
+        (episode) => episode.id == selectedValue
       );
       makePageForEpisodes([selectedEpisode]); // Render selected episode
       episodeCounter(1, episodeList.length)
@@ -129,7 +127,7 @@ function filter(stateList, searchTerm) {
       element.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       element.summary.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  return filteredElements;
+  makePageForShows(filteredElements);
 }
 
 // Update episode counter
@@ -143,11 +141,11 @@ function createSearchTerm(stateList) {
   const searchBox = document.getElementById("search");
   searchBox.value = "";
   searchBox.addEventListener("input", (event) => {
-    stateList.searchTerm = event.target.value; //Update the searchTerm in state
+    const searchTerm = event.target.value; //Update the searchTerm in state
     filter(stateList, searchTerm); //Re-render with the updated state
   });
 }
-// Create episode cards
+// Create show card
 function makePageForShows(showsList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = ""; //clearing textContent
@@ -173,20 +171,20 @@ function makePageForShows(showsList) {
     </div>
     `;
     
-    // const showTitle = showCard.querySelector("h2"); // Select the h2 element
-    // showTitle.addEventListener("click", () => {
-    //   window.open(show.url, "_self");
-    // });
-    // Append the episode card to the container
+    const showTitle = showCard.querySelector("h2"); // Select the h2 element
+    showTitle.addEventListener("click", () => {
+      window.open(show.url, "_self");
+    });
+    
     showsContainer.append(showCard);
   }
-  // Append the container card to the root
+
   rootElem.append(showsContainer);
 }
-// Create episode cards
+// Create episode card
 function makePageForEpisodes(episodesList) {
   const rootElem = document.getElementById("root");
-  rootElem.textContent = ""; //clearing textContent
+  rootElem.textContent = "";
 
   const episodesContainer = document.createElement("div");
   episodesContainer.className = "episodes-container";
