@@ -7,32 +7,48 @@
   <title>TV Show Project | Rihanna P (RihannaP)</title>
   <link href="style.css" rel="stylesheet" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-    <div id="searchbar">
-      <label>
-        Select Show:<select id="selectS" name="select"></select>
-      </label>
-      <label>
-        Select Episode:<select id="selectE" name="select"></select>
-      </label>
-      <label>
-        Search:<input type="text" id="search" name="search" placeholder="Search episodes ..." />
-      </label>
+
+  <header>
+    <div><h1>TV Shows</h1></div>
+    <div><p>This project uses data originally from  <a href="https://tvmaze.com" target="_blank" style="color:rgb(50, 227, 50) ">TVMaze</a></p></div>
+  </header>
+  
+  <main>
+
+    <div class="searchbar" >
+      <div>
+        <label>
+          Select Show: <select id="selectS" name="select"></select>
+        </label>
+      </div>
+      <nav>
+        <button id="back-to-shows" style="display: none;">Back to Shows</button>
+      </nav>
+      <div>
+        <label>
+          Select Episode: <select id="selectE" name="select"></select>
+        </label>
+      </div>
+      <div>
+        <label>
+          Search:<input type="text" id="search" name="search" placeholder="Search episodes ..." />
+        </label>
+        </div>
       <p id="episodeCount"></p>
       <h2 id="alarm" style="color: black; font-size: 1.2em; margin-bottom: 10px;"></h2>
-  </div>
-  <div id="root">
-  </div>
+    </div>
 
-  <!-- Loads YOUR javascript code -->
-  <script src="script.js" defer></script><!--good practice for non-blocking behavior-->
+    <div id="root">
+    </div>
+  </main>
+
   <footer>
-    <p>
-      Data originally comes from <a href="https://tvmaze.com/"> TV Maze!</a>
-    </p>
+    <p>Data provided by <a href="https://tvmaze.com/"  style="color:rgb(50, 227, 50) "> TV Maze!</a></p>
   </footer>
+
 </body>
 
 </html>

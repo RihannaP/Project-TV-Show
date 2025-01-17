@@ -126,7 +126,8 @@ function render(stateList) {
       element.summary.toLowerCase().includes(stateList.searchTerm.toLowerCase())
   );
   console.log(filteredElements);
-  makePageForEpisodes(filteredElements);
+  makePageForShows(filteredElements)
+ // makePageForEpisodes(filteredElements);
   episodeCounter(filteredElements.length, stateList.all.length);
 }
 
@@ -145,7 +146,41 @@ function createSearchTerm(stateList) {
     render(stateList); //Re-render with the updated state
   });
 }
+// Create episode cards
+function makePageForShows(showsList) {
+  const rootElem = document.getElementById("root");
+  rootElem.textContent = ""; //clearing textContent
 
+  const showsContainer = document.createElement("div");
+  showsContainer.className = "episodes-container";
+
+  for (const show of showsList) {
+    const showCard = document.createElement("div");
+    showCard.className = "show-card";
+
+    showCard.innerHTML = `
+    <div>
+    <img src="${show.image.medium}" alt="${show.name}">
+    </div>
+    <div>
+    <h2>${show.name}</h2>
+    <p>Genres: ${show.genres}</p>
+    <p>Status: ${show.status}</p>
+    <p>Rating: ${show.rating.average}</p>
+    <p>Runtime: ${show.runtime} minutes</p>
+    <p>Summary: ${show.summary}</p>
+    </div>
+    `;
+    // each episode can open in new window for more detail (from the source website)
+    showCard.addEventListener("click", () => {
+      window.open(show.url, "_blank");
+    });
+    // Append the episode card to the container
+    showsContainer.append(showCard);
+  }
+  // Append the container card to the root
+  rootElem.append(showsContainer);
+}
 // Create episode cards
 function makePageForEpisodes(episodesList) {
   const rootElem = document.getElementById("root");
