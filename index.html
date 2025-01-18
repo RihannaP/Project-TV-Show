@@ -13,7 +13,7 @@
 
   <header>
     <div><h1>TV Shows</h1></div>
-    <div><p>This project uses data originally from  <a href="https://tvmaze.com" target="_blank" style="color:rgb(50, 227, 50) ">TVMaze</a></p></div>
+    <div><p>This project uses data originally from  <a href="https://tvmaze.com" target="_blank" style="color:#d2733b">TVMaze</a></p></div>
   </header>
   
   <main>
@@ -21,21 +21,21 @@
     <div class="searchbar" >
       <div>
         <label>
-          Select Show: <select id="selectS" name="select"></select>
-        </label>
-      </div>
-      <nav>
-        <button id="back-to-shows" style="display: none;">Back to Shows</button>
-      </nav>
-      <div>
-        <label>
-          Select Episode: <select id="selectE" name="select"></select>
+          <select id="selectS" name="select"></select>
         </label>
       </div>
       <div>
         <label>
-          Search:<input type="text" id="search" name="search" placeholder="Search episodes ..." />
+          <select id="selectE" style="display: none;" name="select"></select>
         </label>
+      </div>
+      <div>
+        <label>
+          <input type="text" id="search" name="search" placeholder="Search here ..." />
+        </label>
+        <nav>
+          <button id="back-to-shows" style="display: none;">Back to Shows</button>
+        </nav>
         </div>
       <p id="episodeCount"></p>
     </div>
@@ -45,7 +45,7 @@
   </main>
 
   <footer>
-    <p>Data provided by <a href="https://tvmaze.com/"  style="color:rgb(50, 227, 50) "> TV Maze!</a></p>
+    <p>Data provided by <a href="https://tvmaze.com/"  style="color:#d2733b "> TV Maze!</a></p>
   </footer>
 
 </body>
