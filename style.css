@@ -16,7 +16,7 @@ header{
 }
 
 header div{
-  margin: 30px 20px;
+  margin: 30px;
 }
 
 .searchbar{
@@ -54,8 +54,8 @@ header div{
 #search:focus,
 #select:focus {
   outline: none;
-  border-color: #6404f5;
-  box-shadow: 0 0 5px #6404f5;
+  border-color: #d2733b;
+  box-shadow: 0 0 5px #d2733b;
 }
 
 button {
@@ -85,14 +85,15 @@ button {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 100%;
+  max-width: 92%;
   background-color: #1c1c1c;
   color: #e2e1f2;
   border-radius: 8px;
-  padding: 15px;
+  padding: 20px;
   text-align: left;
   margin-bottom: 15px;
   transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  
 }
 
 .show-card img {
@@ -103,15 +104,15 @@ button {
 }
 
 .show-card h2 {
-  color: #71ffec;
+  color: #d2733b;
   font-size: 1.5rem;
   margin: 0;
   
 }
 .show-card h2:hover{
   cursor: pointer;
-    color: #d2733b;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    color: #af9669;
+  
 }
 
 .show-card p {
@@ -119,11 +120,16 @@ button {
   color: #ccc;
 }
 
+.show-card:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
 .episode-card{
   width: 100%;
-  max-width: 300px;
+  max-width: 290px;
   background-color: #1c1c1c;
-  color: #e2e1f2;
+  color: #bcb8b1;
   border-radius: 8px;
   text-align: center;
   padding: 15px;
@@ -136,15 +142,14 @@ button {
 }
 
 .episode-card h2 {
-  color: #71ffec;
-  font-size: 1.8rem;
+  color: #d2733b;
+  font-size: 1.4rem;
   margin: 10px 0;
 }
 
 .episode-card:hover {
   cursor: pointer;
-  background-color: rgba(156, 87, 241, 0.2);
-  border-color: #6404f5;
+  border: 1px solid #bcb8b1;
   transform: scale(1.05);
 }
 
@@ -154,7 +159,6 @@ footer {
   width: 100%;
   justify-content: center;
   background: #bcb8b1;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
+  padding: 30px;
+  
 }

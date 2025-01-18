@@ -10,7 +10,9 @@ async function setup() {
       showStates = shows;
       makePageForShows(showStates);
       selectShowDropDown(showStates);
-      showSearchBox(showStates); 
+      showSearchBox(showStates);
+      episodeDropVisible(false);
+      ShowDropVisible(true);
       
     }
   } catch (error) {
@@ -81,6 +83,7 @@ function selectShowDropDown(showList) {
           selectDropDownEpisodes(episodes); // Populate episode dropdown
           backToShowsButton(true);
           episodeDropVisible(true);
+          ShowDropVisible(false);
           
   
         }
@@ -141,7 +144,10 @@ function showSearchBox(stateList) {
     const searchTerm = event.target.value; //Update the searchTerm in state
     const filteredElements = stateList.filter(
     (element) => element.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    element.summary?.toLowerCase().includes(searchTerm.toLowerCase())
+    element.summary?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    element.genres.some((genre) =>
+      genre.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     //element.some((genre) => genre.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     makePageForShows(filteredElements);
@@ -166,13 +172,17 @@ function episodeSearchBox(stateList){
 function backToShowsButton(status) {
   const backToShowsButton = document.getElementById("back-to-shows");
   backToShowsButton.style.display = status ? "block" : "none";
-  backToShowsButton.addEventListener("click", () => { makePageForShows(showStates) })
+  backToShowsButton.addEventListener("click", () => { setup() })
     
 }
 
 function episodeDropVisible(status) {
   const episodeListVisible = document.getElementById("selectE");
   episodeListVisible.style.display = status ? "block" : "none";
+}
+function ShowDropVisible(status) {
+  const showListVisible = document.getElementById("selectS");
+  showListVisible.style.display = status ? "block" : "none";
 }
 
 // Create show card
@@ -202,8 +212,26 @@ function makePageForShows(showsList) {
     `;
     
     const showTitle = showCard.querySelector("h2"); // Select the h2 element
-    showTitle.addEventListener("click", () => {
-      window.open(makePageForEpisodes(show), "_self");
+    showTitle.addEventListener("click", async() => {
+       try {
+        const episodes = await fetchWithCache(
+          `https://api.tvmaze.com/shows/${show.id}/episodes`
+        );
+        if (episodes) {
+          makePageForEpisodes(episodes)
+          episodeSearchBox(episodes); // Render episodes
+          selectDropDownEpisodes(episodes); // Populate episode dropdown
+          backToShowsButton(true);
+          episodeDropVisible(true);
+          ShowDropVisible(false);
+          
+          
+  
+        }
+      } catch (error) {
+        const rootElem = document.getElementById("root");
+        rootElem.innerHTML = `<p>Error fetching episodes: ${error}</p>`;
+      }
     });
     
     showsContainer.append(showCard);
