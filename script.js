@@ -12,7 +12,8 @@ async function setup() {
       selectShowDropDown(showStates);
       showSearchBox(showStates);
       episodeDropVisible(false);
-      ShowDropVisible(true);
+      showDropVisible(true);
+      episodeCounterVisible(false)
       
     }
   } catch (error) {
@@ -79,11 +80,13 @@ function selectShowDropDown(showList) {
         );
         if (episodes) {
           makePageForEpisodes(episodes)
+          episodeCounter(episodes.length, episodes.length)
           episodeSearchBox(episodes); // Render episodes
           selectDropDownEpisodes(episodes); // Populate episode dropdown
           backToShowsButton(true);
           episodeDropVisible(true);
-          ShowDropVisible(false);
+          showDropVisible(false);
+          episodeCounterVisible(true)
           
   
         }
@@ -180,9 +183,13 @@ function episodeDropVisible(status) {
   const episodeListVisible = document.getElementById("selectE");
   episodeListVisible.style.display = status ? "block" : "none";
 }
-function ShowDropVisible(status) {
+function showDropVisible(status) {
   const showListVisible = document.getElementById("selectS");
   showListVisible.style.display = status ? "block" : "none";
+}
+function episodeCounterVisible(status) {
+  const counterVisible = document.getElementById("episodeCount");
+  counterVisible.style.display = status ? "block" : "none";
 }
 
 // Create show card
@@ -223,7 +230,8 @@ function makePageForShows(showsList) {
           selectDropDownEpisodes(episodes); // Populate episode dropdown
           backToShowsButton(true);
           episodeDropVisible(true);
-          ShowDropVisible(false);
+          showDropVisible(false);
+          episodeCounterVisible(true);
           
           
   
